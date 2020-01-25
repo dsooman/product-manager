@@ -3,6 +3,10 @@ package product.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * Thrown to indicate that an update to a <code>Product</code> was not
+ * successful.
+ */
 @ResponseStatus(value = HttpStatus.CONFLICT)
 public class ProductUpdateException extends RuntimeException {
 
