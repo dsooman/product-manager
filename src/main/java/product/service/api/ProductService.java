@@ -23,5 +23,4 @@ public interface ProductService {
 	void setMinAmount(String name, Long amount);
 
 	void unblock(String name);
-
 }

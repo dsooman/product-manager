@@ -30,11 +30,13 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void block(final String name) {
 		Objects.requireNonNull(name);
+		
 		final Optional<Product> productOptional = this.getByName(name);
+		
 		if (productOptional.isEmpty()) {
 			throw new InvalidProductException("Could not block product " + name + " as is does not exist");
 		}
-
+		
 		final Product product = productOptional.get();
 		product.setBlocked(true);
 		this.save(product).orElseThrow(() -> new ProductCreationException("Could not save product with name " + name));
@@ -43,11 +45,13 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product create(final String name) {
 		Objects.requireNonNull(name);
+		
 		final Product product = new Product();
 		product.setName(name);
 		product.setBlocked(false);
 		product.setMinAmount((long) 0);
 		product.setCurrentAmount((long) 0);
+		
 		return this.save(product)
 				.orElseThrow(() -> new ProductCreationException("Could not create product with name " + name));
 	}
@@ -55,9 +59,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void delete(final String name) {
 		Objects.requireNonNull(name);
+		
 		if (this.getByName(name).isEmpty()) {
 			throw new InvalidProductException("Could not delete product " + name + " as is does not exist");
 		}
+		
 		this.productRepository.deleteByName(name);
 	}
 
@@ -82,7 +88,9 @@ public class ProductServiceImpl implements ProductService {
 	public void setCurrentAmount(final String name, final Long amount) {
 		Objects.requireNonNull(name);
 		Objects.requireNonNull(amount);
+		
 		final Optional<Product> productOptional = this.getByName(name);
+		
 		if (productOptional.isEmpty()) {
 			throw new InvalidProductException(
 					"Could not set current amount on product " + name + " as is does not exist");
@@ -97,7 +105,9 @@ public class ProductServiceImpl implements ProductService {
 	public void setMinAmount(final String name, final Long amount) {
 		Objects.requireNonNull(name);
 		Objects.requireNonNull(amount);
+		
 		final Optional<Product> productOptional = this.getByName(name);
+		
 		if (productOptional.isEmpty()) {
 			throw new InvalidProductException(
 					"Could not set minimum amount on product " + name + " as is does not exist");
@@ -111,7 +121,9 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void unblock(final String name) {
 		Objects.requireNonNull(name);
+		
 		final Optional<Product> productOptional = this.getByName(name);
+		
 		if (productOptional.isEmpty()) {
 			throw new InvalidProductException("Could not unblock product " + name + " as is does not exist");
 		}
