@@ -2,6 +2,7 @@ package product.service.api;
 
 import java.util.List;
 
+import product.model.Product;
 import product.model.ProductPurchaseRequirement;
 
 /**
@@ -9,11 +10,13 @@ import product.model.ProductPurchaseRequirement;
  */
 public interface ProductService {
 
-	void create(String name);
+	Product create(String name);
 
 	void delete(String name);
 
 	void block(String name);
+	
+	void unblock(String name);
 
 	void setCurrentAmount(String name, Long amount);
 

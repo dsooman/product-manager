@@ -47,7 +47,7 @@ class ProductServiceImplSpec extends Specification {
 		productService.save(product)
 
 		when: "the product is retrieved by name"
-		Product retrieved_product = productService.getByName("A")
+		Product retrieved_product = productService.getByName("A").get()
 
 		then: "the retrieved product will have the same values as the saved product"
 		retrieved_product.name == product.name
