@@ -7,7 +7,7 @@ import product.model.Product;
  */
 public interface ProductService {
 
-	Product save(final Product product);
-
 	Product getByName(final String name);
+
+	Product save(final Product product);
 }

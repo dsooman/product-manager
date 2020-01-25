@@ -26,18 +26,18 @@ public class ProductServiceImpl implements ProductService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Product save(Product product) {
-		Objects.requireNonNull(product);
-		productRepository.save(product);
-		return productRepository.findByName(product.getName());
+	public Product getByName(final String name) {
+		Objects.requireNonNull(name);
+		return this.productRepository.findByName(name);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Product getByName(String name) {
-		Objects.requireNonNull(name);
-		return productRepository.findByName(name);
+	public Product save(final Product product) {
+		Objects.requireNonNull(product);
+		this.productRepository.save(product);
+		return this.productRepository.findByName(product.getName());
 	}
 }

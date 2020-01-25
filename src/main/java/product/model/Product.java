@@ -11,60 +11,60 @@ import javax.persistence.Table;
 @Table(name = "product")
 public class Product {
 
+	@Column(name = "blocked", nullable = true)
+	private Boolean blocked;
+
+	@Column(name = "current_amount", nullable = true)
+	private Long currentAmount;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long ID;
 
-	@Column(name = "name", nullable = false)
-	private String name;
-
-	@Column(name = "blocked", nullable = true)
-	private Boolean blocked;
-
 	@Column(name = "min_amount", nullable = true)
 	private Long minAmount;
 
-	@Column(name = "current_amount", nullable = true)
-	private Long currentAmount;
-
-	public Long getID() {
-		return ID;
-	}
-
-	public void setID(Long iD) {
-		ID = iD;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	@Column(name = "name", nullable = false)
+	private String name;
 
 	public Boolean getBlocked() {
-		return blocked;
-	}
-
-	public void setBlocked(Boolean blocked) {
-		this.blocked = blocked;
-	}
-
-	public Long getMinAmount() {
-		return minAmount;
-	}
-
-	public void setMinAmount(Long minAmount) {
-		this.minAmount = minAmount;
+		return this.blocked;
 	}
 
 	public Long getCurrentAmount() {
-		return currentAmount;
+		return this.currentAmount;
 	}
 
-	public void setCurrentAmount(Long currentAmount) {
+	public Long getID() {
+		return this.ID;
+	}
+
+	public Long getMinAmount() {
+		return this.minAmount;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setBlocked(final Boolean blocked) {
+		this.blocked = blocked;
+	}
+
+	public void setCurrentAmount(final Long currentAmount) {
 		this.currentAmount = currentAmount;
+	}
+
+	public void setID(final Long iD) {
+		this.ID = iD;
+	}
+
+	public void setMinAmount(final Long minAmount) {
+		this.minAmount = minAmount;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
 	}
 }
