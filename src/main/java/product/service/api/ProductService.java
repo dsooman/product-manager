@@ -43,6 +43,8 @@ public interface ProductService {
 	 * all <code>Product</code> currently recorded. The logic governing if a
 	 * <code>Product</code> appears in this set is contained within the
 	 * <code>Product</code> class.
+	 * <P>
+	 * <code>Set</code> is unmodifiable because this is a read only report.
 	 * 
 	 * @return <code>Set</code> of applicable
 	 *         <code>ProductPurchaseRequirement</code> for all <code>Product</code>
