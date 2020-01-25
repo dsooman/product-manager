@@ -1,13 +1,24 @@
 package product.service.api;
 
-import product.model.Product;
+import java.util.List;
+
+import product.model.ProductPurchaseRequirement;
 
 /**
  * Service for managing Products and their rules.
  */
 public interface ProductService {
 
-	Product getByName(final String name);
+	void create(String name);
 
-	Product save(final Product product);
+	void delete(String name);
+
+	void block(String name);
+
+	void setCurrentAmount(String name, Long amount);
+
+	void setMinAmount(String name, Long amount);
+
+	List<ProductPurchaseRequirement> getProductPurchaseRequirements();
+
 }
