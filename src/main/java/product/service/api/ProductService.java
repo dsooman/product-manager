@@ -15,7 +15,7 @@ public interface ProductService {
 
 	/**
 	 * Block a <code>Product</code> by name.
-	 * 
+	 *
 	 * @param name - name of the <code>Product</code>
 	 */
 	void block(String name);
@@ -26,7 +26,7 @@ public interface ProductService {
 	 * If this method is called on a Product name that is already present, then the
 	 * existing Product will be deleted and a new Product will be created that has
 	 * the default creation values.
-	 * 
+	 *
 	 * @param name - name of the <code>Product</code>
 	 * @return the <code>Product</code> that has been created. Since this involves
 	 *         the persistence of the <code>Product</code> in a relational database,
@@ -37,7 +37,7 @@ public interface ProductService {
 
 	/**
 	 * Deletes a <code>Product</code> by name.
-	 * 
+	 *
 	 * @param name - name of the <code>Product</code>
 	 */
 	void delete(String name);
@@ -49,7 +49,7 @@ public interface ProductService {
 	 * <code>Product</code> class.
 	 * <P>
 	 * <code>Set</code> is unmodifiable because this is a read only report.
-	 * 
+	 *
 	 * @return <code>Set</code> of applicable
 	 *         <code>ProductPurchaseRequirement</code> for all <code>Product</code>
 	 *         currently recorded.
@@ -58,7 +58,7 @@ public interface ProductService {
 
 	/**
 	 * Sets the current amount held of the specified <code>Product</code>.
-	 * 
+	 *
 	 * @param name   - name of the <code>Product</code>
 	 * @param amount - amount of the <code>Product</code> in stock
 	 */
@@ -68,7 +68,7 @@ public interface ProductService {
 	 * Sets the minimum amount that should be held of the specified
 	 * <code>Product</code>. The requirement to purchase additional stock of this
 	 * <code>Product</code> can be overidden by blocking the <code>Product</code>.
-	 * 
+	 *
 	 * @param name   - name of the <code>Product</code>
 	 * @param amount - minimum amount of the <code>Product</code> which should be in
 	 *               stock.
@@ -77,7 +77,7 @@ public interface ProductService {
 
 	/**
 	 * Unblock a <code>Product</code> by name.
-	 * 
+	 *
 	 * @param name - name of the <code>Product</code>
 	 */
 	void unblock(String name);

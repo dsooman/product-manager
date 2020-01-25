@@ -14,7 +14,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
 	/**
 	 * Delete a <code>Product</code> by name.
-	 * 
+	 *
 	 * @param name - name of the <code>Product</code> to delete
 	 * @return ID of the <code>Product</code> deleted
 	 */
@@ -24,7 +24,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
 	/**
 	 * Finds and returns a <code>Product</code> by name.
-	 * 
+	 *
 	 * @param name - name of the <code>Product</code> to find and return
 	 * @return the <code>Product</code> if it has found based on the specified name
 	 */

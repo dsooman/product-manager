@@ -54,7 +54,7 @@ public class Product {
 
 	/**
 	 * Gets if the <code>Product</code> is blocked from further ordering.
-	 * 
+	 *
 	 * @return <code>true</code> if the <code>Product</code> is blocked from further
 	 *         ordering.
 	 */
@@ -64,7 +64,7 @@ public class Product {
 
 	/**
 	 * Gets the current amount of the <code>Product</code>.
-	 * 
+	 *
 	 * @return the current amount of the <code>Product</code>
 	 */
 	public Long getCurrentAmount() {
@@ -73,7 +73,7 @@ public class Product {
 
 	/**
 	 * Gets the ID of the <code>Product</code>.
-	 * 
+	 *
 	 * @return the ID of the <code>Product</code>
 	 */
 	public Long getID() {
@@ -83,7 +83,7 @@ public class Product {
 	/**
 	 * Get the minimum amount of stock of this <code>Product</code> that should be
 	 * present.
-	 * 
+	 *
 	 * @return the minimum amount of stock of this <code>Product</code> that should
 	 *         be present
 	 */
@@ -93,59 +93,11 @@ public class Product {
 
 	/**
 	 * Gets the name of the <code>Product</code>.
-	 * 
+	 *
 	 * @return name of the <code>Product</code>
 	 */
 	public String getName() {
 		return this.name;
-	}
-
-	/**
-	 * Sets if the <code>Product</code> is blocked from further ordering.
-	 * 
-	 * @param blocked - blocked if the <code>Product</code> is blocked from further
-	 *                ordering.
-	 */
-	public void setBlocked(final Boolean blocked) {
-		this.blocked = blocked;
-	}
-
-	/**
-	 * Sets the current amount of the <code>Product</code>.
-	 * 
-	 * @param currentAmount - current amount of the <code>Product</code>
-	 */
-	public void setCurrentAmount(final Long currentAmount) {
-		this.currentAmount = currentAmount;
-	}
-
-	/**
-	 * Sets the ID of the <code>Product</code>.
-	 * 
-	 * @param ID - ID of the <code>Product</code>
-	 */
-	public void setID(final Long ID) {
-		this.ID = ID;
-	}
-
-	/**
-	 * Sets the minimum amount of stock of this <code>Product</code> that should be
-	 * present
-	 * 
-	 * @param minAmount - minimum amount of stock of this <code>Product</code> that
-	 *                  should be present
-	 */
-	public void setMinAmount(final Long minAmount) {
-		this.minAmount = minAmount;
-	}
-
-	/**
-	 * Sets the name of the <code>Product</code>
-	 * 
-	 * @param name - name of the <code>Product</code>
-	 */
-	public void setName(final String name) {
-		this.name = name;
 	}
 
 	/**
@@ -159,8 +111,8 @@ public class Product {
 	 * indicate that the best location would be inside the Product class, with the
 	 * logic part of the entity as opposed to in the service. Therefore, for this
 	 * purposes of this exercise I have placed it here.
-	 * 
-	 * 
+	 *
+	 *
 	 * @return <code>ProductPurchaseRequirement</code> for this
 	 *         <code>Product</code>, if applicable
 	 */
@@ -168,8 +120,8 @@ public class Product {
 
 		ProductPurchaseRequirement productPurchaseRequirement = null;
 
-		if (this.name != null && this.blocked != null && this.currentAmount != null && this.minAmount != null
-				&& !this.blocked && this.currentAmount < this.minAmount) {
+		if ((this.name != null) && (this.blocked != null) && (this.currentAmount != null) && (this.minAmount != null)
+				&& !this.blocked && (this.currentAmount < this.minAmount)) {
 
 			productPurchaseRequirement = new ProductPurchaseRequirement();
 			productPurchaseRequirement.setName(this.name);
@@ -178,5 +130,53 @@ public class Product {
 		}
 
 		return Optional.ofNullable(productPurchaseRequirement);
+	}
+
+	/**
+	 * Sets if the <code>Product</code> is blocked from further ordering.
+	 *
+	 * @param blocked - blocked if the <code>Product</code> is blocked from further
+	 *                ordering.
+	 */
+	public void setBlocked(final Boolean blocked) {
+		this.blocked = blocked;
+	}
+
+	/**
+	 * Sets the current amount of the <code>Product</code>.
+	 *
+	 * @param currentAmount - current amount of the <code>Product</code>
+	 */
+	public void setCurrentAmount(final Long currentAmount) {
+		this.currentAmount = currentAmount;
+	}
+
+	/**
+	 * Sets the ID of the <code>Product</code>.
+	 *
+	 * @param ID - ID of the <code>Product</code>
+	 */
+	public void setID(final Long ID) {
+		this.ID = ID;
+	}
+
+	/**
+	 * Sets the minimum amount of stock of this <code>Product</code> that should be
+	 * present
+	 *
+	 * @param minAmount - minimum amount of stock of this <code>Product</code> that
+	 *                  should be present
+	 */
+	public void setMinAmount(final Long minAmount) {
+		this.minAmount = minAmount;
+	}
+
+	/**
+	 * Sets the name of the <code>Product</code>
+	 *
+	 * @param name - name of the <code>Product</code>
+	 */
+	public void setName(final String name) {
+		this.name = name;
 	}
 }

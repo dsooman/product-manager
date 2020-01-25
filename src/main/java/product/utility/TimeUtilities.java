@@ -62,7 +62,7 @@ public class TimeUtilities {
 	 */
 	public static Date getDateFromTime(final Long epochTime) {
 		Objects.requireNonNull(epochTime);
-		return TimeUtilities.getDateFromTime(epochTime.longValue());
+		return TimeUtilities.getDateFromTime(epochTime);
 	}
 
 	/**
@@ -111,6 +111,6 @@ public class TimeUtilities {
 	 */
 	public static String getFormattedMonthYearFromTime(final Long epochTime) {
 		Objects.requireNonNull(epochTime);
-		return TimeUtilities.getFormattedMonthYearFromTime(epochTime.longValue());
+		return TimeUtilities.getFormattedMonthYearFromTime(epochTime);
 	}
 }

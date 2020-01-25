@@ -28,16 +28,16 @@ import product.utility.TimeUtilities;
 public class ProductServiceImpl implements ProductService {
 
 	/**
-	 * The ProductRepository.
-	 */
-	@Autowired
-	private ProductRepository productRepository;
-
-	/**
 	 * The ProductPurchaseRequirementRepository.
 	 */
 	@Autowired
 	private ProductPurchaseRequirementRepository productPurchaseRequirementRepository;
+
+	/**
+	 * The ProductRepository.
+	 */
+	@Autowired
+	private ProductRepository productRepository;
 
 	/**
 	 * {@inheritDoc}
@@ -102,7 +102,7 @@ public class ProductServiceImpl implements ProductService {
 
 	/**
 	 * Gets an <code>Optional</code> of a <code>Product</code> by name.
-	 * 
+	 *
 	 * @param name - name of the <code>Product</code>
 	 * @return the <code>Optional</code> of a <code>Product</code>, which will be
 	 *         empty if the <code>Product</code> was not found
@@ -118,21 +118,21 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Set<ProductPurchaseRequirement> getProductPurchaseRequirements() {
 
-		Long currentTime = TimeUtilities.getCurrentTime();
+		final Long currentTime = TimeUtilities.getCurrentTime();
 
-		List<Product> products = new ArrayList<Product>();
-		productRepository.findAll().forEach(product -> products.add(product));
+		final List<Product> products = new ArrayList<>();
+		this.productRepository.findAll().forEach(product -> products.add(product));
 		return Collections.unmodifiableSet(products.stream().map(Product::getProductPurchaseRequirement)
 				.filter(Optional::isPresent).map(Optional::get).map(productPurchaseRequirement -> {
 					productPurchaseRequirement.setTime(currentTime);
-					productPurchaseRequirementRepository.save(productPurchaseRequirement);
+					this.productPurchaseRequirementRepository.save(productPurchaseRequirement);
 					return productPurchaseRequirement;
 				}).collect(Collectors.toSet()));
 	}
 
 	/**
 	 * Saves a <code>Product</code>.
-	 * 
+	 *
 	 * @param product - the <code>Product</code> to save.
 	 * @return <code>Optional</code> of the <code>Product</code>
 	 */

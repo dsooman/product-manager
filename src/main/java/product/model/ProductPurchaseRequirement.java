@@ -16,40 +16,19 @@ import javax.persistence.Table;
 public class ProductPurchaseRequirement {
 
 	/**
+	 * The amount of the <code>Product</code> to be ordered in order to meet the
+	 * minimum stock level requirement.
+	 */
+	@Column(name = "amount", nullable = false)
+	private Long amount;
+
+	/**
 	 * Database primary key value.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long ID;
-
-	/**
-	 * Gets the time that this <code>ProductPurchaseRequirement</code> was
-	 * generated.
-	 * 
-	 * @return time that this <code>ProductPurchaseRequirement</code> was generated
-	 */
-	public Long getTime() {
-		return time;
-	}
-
-	/**
-	 * Sets the time that this <code>ProductPurchaseRequirement</code> was
-	 * generated.
-	 * 
-	 * @param time - time that this <code>ProductPurchaseRequirement</code> was
-	 *             generated.
-	 */
-	public void setTime(Long time) {
-		this.time = time;
-	}
-
-	/**
-	 * The amount of the <code>Product</code> to be ordered in order to meet the
-	 * minimum stock level requirement.
-	 */
-	@Column(name = "amount", nullable = false)
-	private Long amount;
 
 	/**
 	 * The name of the <code>Product</code>
@@ -65,7 +44,7 @@ public class ProductPurchaseRequirement {
 
 	/**
 	 * Get the amount of the <code>Product</code> to be ordered.
-	 * 
+	 *
 	 * @return the amount of the <code>Product</code> to be ordered
 	 */
 	public Long getAmount() {
@@ -74,7 +53,7 @@ public class ProductPurchaseRequirement {
 
 	/**
 	 * Gets the name of the <code>Product</code>.
-	 * 
+	 *
 	 * @return the name of the <code>Product</code>
 	 */
 	public String getName() {
@@ -82,8 +61,18 @@ public class ProductPurchaseRequirement {
 	}
 
 	/**
+	 * Gets the time that this <code>ProductPurchaseRequirement</code> was
+	 * generated.
+	 *
+	 * @return time that this <code>ProductPurchaseRequirement</code> was generated
+	 */
+	public Long getTime() {
+		return this.time;
+	}
+
+	/**
 	 * Sets the amount of the <code>Product</code> to be ordered.
-	 * 
+	 *
 	 * @param amount the amount of the <code>Product</code> to be ordered
 	 */
 	public void setAmount(final Long amount) {
@@ -92,10 +81,21 @@ public class ProductPurchaseRequirement {
 
 	/**
 	 * Sets the name of the <code>Product</code>.
-	 * 
+	 *
 	 * @param name the name of the <code>Product</code>
 	 */
 	public void setName(final String name) {
 		this.name = name;
+	}
+
+	/**
+	 * Sets the time that this <code>ProductPurchaseRequirement</code> was
+	 * generated.
+	 *
+	 * @param time - time that this <code>ProductPurchaseRequirement</code> was
+	 *             generated.
+	 */
+	public void setTime(final Long time) {
+		this.time = time;
 	}
 }
