@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration
 import product.ProductManager
 import product.model.Product
 import product.model.ProductPurchaseRequirement
+import product.repository.ProductPurchaseRequirementRepository
 import product.repository.ProductRepository
 import product.service.impl.ProductServiceImpl
 import spock.lang.Narrative
@@ -30,8 +31,12 @@ class ProductServiceImplSpec extends Specification {
 	@Autowired
 	ProductRepository productRepository
 
+	@Autowired
+	ProductPurchaseRequirementRepository productPurchaseRequirementRepository
+
 	def setup() {
 		productRepository.deleteAll()
+		productPurchaseRequirementRepository.deleteAll()
 	}
 
 	def cleanup() {
@@ -72,7 +77,7 @@ class ProductServiceImplSpec extends Specification {
 
 		when: "one of the Products is blocked"
 		productService.block("A")
-		
+
 		then: "the blocked Product will not appear on the Product purchase purchase requirements results"
 		Set<ProductPurchaseRequirement> productPurchaseRequirements = productService.getProductPurchaseRequirements()
 		String foundProduct1 = "";
