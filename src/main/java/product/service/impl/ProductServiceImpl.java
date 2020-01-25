@@ -69,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
 
 	private Optional<Product> getByName(final String name) {
 		Objects.requireNonNull(name);
-		return Optional.of(this.productRepository.findByName(name));
+		return Optional.ofNullable(this.productRepository.findByName(name));
 	}
 
 	@Override
