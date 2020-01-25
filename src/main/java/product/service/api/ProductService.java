@@ -1,6 +1,6 @@
 package product.service.api;
 
-import java.util.List;
+import java.util.Set;
 
 import product.model.Product;
 import product.model.ProductPurchaseRequirement;
@@ -39,16 +39,16 @@ public interface ProductService {
 	void delete(String name);
 
 	/**
-	 * Gets a <code>List</code> of all <code>ProductPurchaseRequirement</code> for
+	 * Gets a <code>Set</code> of all <code>ProductPurchaseRequirement</code> for
 	 * all <code>Product</code> currently recorded. The logic governing if a
-	 * <code>Product</code> appears in this list is contained within the
+	 * <code>Product</code> appears in this set is contained within the
 	 * <code>Product</code> class.
 	 * 
-	 * @return <code>List</code> of applicable
+	 * @return <code>Set</code> of applicable
 	 *         <code>ProductPurchaseRequirement</code> for all <code>Product</code>
 	 *         currently recorded.
 	 */
-	List<ProductPurchaseRequirement> getProductPurchaseRequirements();
+	Set<ProductPurchaseRequirement> getProductPurchaseRequirements();
 
 	/**
 	 * Sets the current amount held of the specified <code>Product</code>.
