@@ -22,6 +22,10 @@ public interface ProductService {
 
 	/**
 	 * Create a new <code>Product</code> by initially specifying its name.
+	 * <P>
+	 * If this method is called on a Product name that is already present, then the
+	 * existing Product will be deleted and a new Product will be created that has
+	 * the default creation values.
 	 * 
 	 * @param name - name of the <code>Product</code>
 	 * @return the <code>Product</code> that has been created. Since this involves

@@ -55,15 +55,25 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product create(final String name) {
 		Objects.requireNonNull(name);
-
+		
+		Optional<Product> optionalProduct = this.getByName(name);
+		if (optionalProduct.isPresent()) {
+			this.delete(name);
+		}
+				
 		final Product product = new Product();
 		product.setName(name);
 		product.setBlocked(false);
 		product.setMinAmount((long) 0);
 		product.setCurrentAmount((long) 0);
-
-		return this.save(product)
-				.orElseThrow(() -> new ProductUpdateException("Could not create product with name " + name));
+		this.save(product);
+		
+		optionalProduct = this.getByName(product.getName());
+		if (optionalProduct.isPresent()) {
+			return optionalProduct.get();
+		}
+		
+		throw new ProductUpdateException("Could not save product with name " + name);
 	}
 
 	/**
