@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import product.exception.InvalidProductException;
-import product.exception.ProductCreationException;
+import product.exception.ProductUpdateException;
 import product.model.Product;
 import product.model.ProductPurchaseRequirement;
 import product.repository.ProductRepository;
@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		final Product product = productOptional.get();
 		product.setBlocked(true);
-		this.save(product).orElseThrow(() -> new ProductCreationException("Could not save product with name " + name));
+		this.save(product).orElseThrow(() -> new ProductUpdateException("Could not save product with name " + name));
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
 		product.setCurrentAmount((long) 0);
 		
 		return this.save(product)
-				.orElseThrow(() -> new ProductCreationException("Could not create product with name " + name));
+				.orElseThrow(() -> new ProductUpdateException("Could not create product with name " + name));
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class ProductServiceImpl implements ProductService {
 
 		final Product product = productOptional.get();
 		product.setCurrentAmount(amount);
-		this.save(product).orElseThrow(() -> new ProductCreationException("Could not save product with name " + name));
+		this.save(product).orElseThrow(() -> new ProductUpdateException("Could not save product with name " + name));
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class ProductServiceImpl implements ProductService {
 
 		final Product product = productOptional.get();
 		product.setMinAmount(amount);
-		this.save(product).orElseThrow(() -> new ProductCreationException("Could not save product with name " + name));
+		this.save(product).orElseThrow(() -> new ProductUpdateException("Could not save product with name " + name));
 	}
 
 	@Override
@@ -130,6 +130,6 @@ public class ProductServiceImpl implements ProductService {
 
 		final Product product = productOptional.get();
 		product.setBlocked(false);
-		this.save(product).orElseThrow(() -> new ProductCreationException("Could not save product with name " + name));
+		this.save(product).orElseThrow(() -> new ProductUpdateException("Could not save product with name " + name));
 	}
 }
