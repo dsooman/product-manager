@@ -60,23 +60,19 @@ class ProductServiceImplSpec extends Specification {
 	def "ProductServiceImpl can block a Product and it will not appear on Product purchase purchase requirements results"() {
 
 		given: "two new Products are created and saved, where they require additional purchasing to maintain desired stock levels"
-		Product product1 = productService.create("A")
-		product1.blocked = true
-		product1.minAmount = 10
-		product1.currentAmount = 5
-		productService.save(product1)
-		Product product2 = productService.create("B")
-		product2.minAmount = 15
-		product2.currentAmount = 10
-		productService.save(product2)
+		productService.create("A")
+		productService.setMinAmount("A", 10)
+		productService.setCurrentAmount("A", 5)
+		productService.create("B")
+		productService.setMinAmount("B", 10)
+		productService.setCurrentAmount("B", 5)
 		Product product3 = productService.create("C")
-		product3.minAmount = 15
-		product3.currentAmount = 10
-		productService.save(product3)
+		productService.setMinAmount("C", 10)
+		productService.setCurrentAmount("C", 5)
 
 		when: "one of the Products is blocked"
-		productService.block(product1.name)
-
+		productService.block("A")
+		
 		then: "the blocked Product will not appear on the Product purchase purchase requirements results"
 		Set<ProductPurchaseRequirement> productPurchaseRequirements = productService.getProductPurchaseRequirements()
 		String foundProduct1 = "";
