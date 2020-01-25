@@ -69,6 +69,10 @@ class ProductServiceImplSpec extends Specification {
 		product2.minAmount = 15
 		product2.currentAmount = 10
 		productService.save(product2)
+		Product product3 = productService.create("C")
+		product3.minAmount = 15
+		product3.currentAmount = 10
+		productService.save(product3)
 
 		when: "one of the Products is blocked"
 		productService.block(product1.name)
@@ -77,17 +81,22 @@ class ProductServiceImplSpec extends Specification {
 		Set<ProductPurchaseRequirement> productPurchaseRequirements = productService.getProductPurchaseRequirements()
 		String foundProduct1 = "";
 		String foundProduct2 = "";
+		String foundProduct3 = "";
 
 		for (ProductPurchaseRequirement productPurchaseRequirement: productPurchaseRequirements) {
 			if (productPurchaseRequirement.name == "A") {
-				foundProduct1 = "A"
+				foundProduct1 = productPurchaseRequirement.name
 			}
 			if (productPurchaseRequirement.name == "B") {
-				foundProduct2 = "B"
+				foundProduct2 = productPurchaseRequirement.name
+			}
+			if (productPurchaseRequirement.name == "C") {
+				foundProduct3 = productPurchaseRequirement.name
 			}
 		}
 
 		foundProduct1 == ""
 		foundProduct2 == "B"
+		foundProduct3 == "C"
 	}
 }
