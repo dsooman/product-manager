@@ -10,7 +10,8 @@ import product.repository.ProductRepository;
 import product.service.api.ProductService;
 
 /**
- * Service for working with Products.
+ * An implementation of ProductService which leverages Spring Data for
+ * persistence.
  */
 @Service
 public class ProductServiceImpl implements ProductService {

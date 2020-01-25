@@ -3,7 +3,7 @@ package product.service.api;
 import product.model.Product;
 
 /**
- * Service for working with Products.
+ * Service for managing Products and their rules.
  */
 public interface ProductService {
 
