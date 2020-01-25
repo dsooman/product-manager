@@ -10,18 +10,18 @@ import product.model.ProductPurchaseRequirement;
  */
 public interface ProductService {
 
+	void block(String name);
+
 	Product create(String name);
 
 	void delete(String name);
 
-	void block(String name);
-	
-	void unblock(String name);
+	List<ProductPurchaseRequirement> getProductPurchaseRequirements();
 
 	void setCurrentAmount(String name, Long amount);
 
 	void setMinAmount(String name, Long amount);
 
-	List<ProductPurchaseRequirement> getProductPurchaseRequirements();
+	void unblock(String name);
 
 }

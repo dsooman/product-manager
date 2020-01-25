@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class InvalidProductException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a <code>InvalidProductException</code> with the specified detail
 	 * message.

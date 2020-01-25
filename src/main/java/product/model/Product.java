@@ -32,6 +32,10 @@ public class Product {
 		return this.blocked;
 	}
 
+	public Boolean isBlocked() {
+		return this.blocked;
+	}
+
 	public Long getCurrentAmount() {
 		return this.currentAmount;
 	}

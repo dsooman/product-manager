@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import product.model.Product;
 
 public interface ProductRepository extends CrudRepository<Product, Long> {
-	
+
 	@Modifying
 	@Transactional
 	Long deleteByName(String name);
