@@ -1,10 +1,13 @@
 package product.service
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.test.context.ContextConfiguration
 
 import product.ProductManager
+import product.model.Product
+import product.repository.ProductRepository
 import product.service.impl.ProductServiceImpl
 import spock.lang.Narrative
 import spock.lang.Specification
@@ -20,7 +23,14 @@ which is a service for managing Products and their rules.
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class ProductServiceImplSpec extends Specification {
 
+	@Autowired
+	ProductServiceImpl productService
+
+	@Autowired
+	ProductRepository productRepository
+
 	def setup() {
+		productRepository.deleteAll()
 	}
 
 	def cleanup() {
@@ -28,13 +38,21 @@ class ProductServiceImplSpec extends Specification {
 
 	def "ProductServiceImpl can create a Product and then retrieve it"() {
 
-		given: "this is a dummy test"
+		given: "a new product is created and saved"
+		Product product = new Product()
+		product.name = "A"
+		product.blocked = true
+		product.minAmount = 5
+		product.currentAmount = 10
+		productService.save(product)
 
-		when: "strings a and b are created"
-		String a = "example"
-		String b = "example"
+		when: "the product is retrieved by name"
+		Product retrieved_product = productService.getByName("A")
 
-		then: "a and b will equal each other"
-		a == b
+		then: "the retrieved product will have the same values as the saved product"
+		retrieved_product.name == product.name
+		retrieved_product.blocked == true
+		retrieved_product.minAmount == product.minAmount
+		retrieved_product.currentAmount == product.currentAmount
 	}
 }

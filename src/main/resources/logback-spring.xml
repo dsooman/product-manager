@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.padual.com/java/logback.xsd" 
+    debug="true" packagingData="true" scan="true" scanPeriod="30 seconds">
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	<logger name="helix" level="INFO" />
+	<logger name="org.springframework.context.annotation.ConfigurationClassEnhancer" level="ERROR" />
+	<logger name="helix.proxy.metasploit.MetasploitProxy" level="DEBUG" />
+</configuration>
+
