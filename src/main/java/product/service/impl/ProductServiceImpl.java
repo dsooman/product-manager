@@ -56,6 +56,8 @@ public class ProductServiceImpl implements ProductService {
 	public Product create(final String name) {
 		Objects.requireNonNull(name);
 		
+		//TODO: there is probably a better way of doing this!
+		
 		Optional<Product> optionalProduct = this.getByName(name);
 		if (optionalProduct.isPresent()) {
 			this.delete(name);
