@@ -15,8 +15,10 @@ import product.exception.InvalidProductException;
 import product.exception.ProductUpdateException;
 import product.model.Product;
 import product.model.ProductPurchaseRequirement;
+import product.repository.ProductPurchaseRequirementRepository;
 import product.repository.ProductRepository;
 import product.service.api.ProductService;
+import product.utility.TimeUtilities;
 
 /**
  * An implementation of ProductService which leverages Spring Data for
@@ -30,6 +32,12 @@ public class ProductServiceImpl implements ProductService {
 	 */
 	@Autowired
 	private ProductRepository productRepository;
+
+	/**
+	 * The ProductPurchaseRequirementRepository.
+	 */
+	@Autowired
+	private ProductPurchaseRequirementRepository productPurchaseRequirementRepository;
 
 	/**
 	 * {@inheritDoc}
@@ -55,26 +63,26 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product create(final String name) {
 		Objects.requireNonNull(name);
-		
-		//TODO: there is probably a better way of doing this!
-		
+
+		// TODO: there is probably a better way of doing this!
+
 		Optional<Product> optionalProduct = this.getByName(name);
 		if (optionalProduct.isPresent()) {
 			this.delete(name);
 		}
-				
+
 		final Product product = new Product();
 		product.setName(name);
 		product.setBlocked(false);
 		product.setMinAmount((long) 0);
 		product.setCurrentAmount((long) 0);
 		this.save(product);
-		
+
 		optionalProduct = this.getByName(product.getName());
 		if (optionalProduct.isPresent()) {
 			return optionalProduct.get();
 		}
-		
+
 		throw new ProductUpdateException("Could not save product with name " + name);
 	}
 
@@ -109,10 +117,17 @@ public class ProductServiceImpl implements ProductService {
 	 */
 	@Override
 	public Set<ProductPurchaseRequirement> getProductPurchaseRequirements() {
+
+		Long currentTime = TimeUtilities.getCurrentTime();
+
 		List<Product> products = new ArrayList<Product>();
 		productRepository.findAll().forEach(product -> products.add(product));
 		return Collections.unmodifiableSet(products.stream().map(Product::getProductPurchaseRequirement)
-				.filter(Optional::isPresent).map(Optional::get).collect(Collectors.toSet()));
+				.filter(Optional::isPresent).map(Optional::get).map(productPurchaseRequirement -> {
+					productPurchaseRequirement.setTime(currentTime);
+					productPurchaseRequirementRepository.save(productPurchaseRequirement);
+					return productPurchaseRequirement;
+				}).collect(Collectors.toSet()));
 	}
 
 	/**
