@@ -1,8 +1,10 @@
 package product.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,8 +95,10 @@ public class ProductServiceImpl implements ProductService {
 	 */
 	@Override
 	public List<ProductPurchaseRequirement> getProductPurchaseRequirements() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Product> products = new ArrayList<Product>();
+		productRepository.findAll().forEach(product -> products.add(product));
+		return products.stream().map(Product::getProductPurchaseRequirement).filter(Optional::isPresent)
+				.map(Optional::get).collect(Collectors.toList());
 	}
 
 	/**
