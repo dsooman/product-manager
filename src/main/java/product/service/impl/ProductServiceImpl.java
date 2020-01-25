@@ -119,9 +119,10 @@ public class ProductServiceImpl implements ProductService {
 	public Set<ProductPurchaseRequirement> getProductPurchaseRequirements() {
 
 		final Long currentTime = TimeUtilities.getCurrentTime();
-
 		final List<Product> products = new ArrayList<>();
+
 		this.productRepository.findAll().forEach(product -> products.add(product));
+
 		return Collections.unmodifiableSet(products.stream().map(Product::getProductPurchaseRequirement)
 				.filter(Optional::isPresent).map(Optional::get).map(productPurchaseRequirement -> {
 					productPurchaseRequirement.setTime(currentTime);
