@@ -2,6 +2,8 @@ Hello to whoever is reviewing this.
 
 Please find my solution to your requirement, which is a Spring Boot based microservice, using Java 11.
 
+In terms of testing, fire it up and point Postman or something at it; I often use curl in command line.
+
 I have written tests in Spock in Groovy to take a BDD type-ish approach.
 
 I have switched this to use in-memory database but it was developed with mysql and will build and work

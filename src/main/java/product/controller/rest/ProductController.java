@@ -28,7 +28,7 @@ public class ProductController {
 	 * delegation to this service within the controller method bodies..
 	 */
 	@Autowired
-	ProductService productService;
+	private ProductService productService;
 
 	/**
 	 * Block a Product.
@@ -37,8 +37,7 @@ public class ProductController {
 	 */
 	@PatchMapping("/block/{name}")
 	public void block(@PathVariable(value = "name") String name) {
-		// TODO Auto-generated method stub
-
+		productService.block(name);
 	}
 
 	/**
@@ -49,8 +48,7 @@ public class ProductController {
 	 */
 	@PostMapping("/create")
 	public Product create(@RequestBody String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return productService.create(name);
 	}
 
 	/**
@@ -60,8 +58,7 @@ public class ProductController {
 	 */
 	@DeleteMapping
 	public void delete(@RequestBody final String name) {
-		// TODO Auto-generated method stub
-
+		productService.delete(name);
 	}
 
 	/**
@@ -72,8 +69,7 @@ public class ProductController {
 	 */
 	@GetMapping("/latestProductPurchaseRequirements")
 	public Set<ProductPurchaseRequirement> getLatestProductPurchaseRequirements() {
-		// TODO Auto-generated method stub
-		return null;
+		return productService.getLatestProductPurchaseRequirements();
 	}
 
 	/**
@@ -84,8 +80,7 @@ public class ProductController {
 	 */
 	@GetMapping("/productPurchaseRequirements")
 	public Set<ProductPurchaseRequirement> getProductPurchaseRequirements() {
-		// TODO Auto-generated method stub
-		return null;
+		return productService.getProductPurchaseRequirements();
 	}
 
 	/**
@@ -98,8 +93,7 @@ public class ProductController {
 	@PatchMapping("/override/{name}/{amount}")
 	public void overrideMinAmount(@PathVariable(value = "name") String name,
 			@PathVariable(value = "amount") Long amount) {
-		// TODO Auto-generated method stub
-
+		productService.overrideMinAmount(name, amount);
 	}
 
 	/**
@@ -111,8 +105,7 @@ public class ProductController {
 	@PatchMapping("/current/{name}/{amount}")
 	public void setCurrentAmount(@PathVariable(value = "name") String name,
 			@PathVariable(value = "amount") Long amount) {
-		// TODO Auto-generated method stub
-
+		productService.setCurrentAmount(name, amount);
 	}
 
 	/**
@@ -123,8 +116,7 @@ public class ProductController {
 	 */
 	@PatchMapping("/min/{name}/{amount}")
 	public void setMinAmount(@PathVariable(value = "name") String name, @PathVariable(value = "amount") Long amount) {
-		// TODO Auto-generated method stub
-
+		productService.setMinAmount(name, amount);
 	}
 
 	/**
@@ -134,7 +126,6 @@ public class ProductController {
 	 */
 	@PatchMapping("/unblock/{name}")
 	public void unblock(@PathVariable(value = "name") String name) {
-		// TODO Auto-generated method stub
-
+		productService.unblock(name);
 	}
 }
