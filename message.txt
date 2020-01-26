@@ -4,10 +4,10 @@ Please find my solution to your requirement, which is a Spring Boot based micros
 
 I have written tests in Spock in Groovy to take a BDD type-ish approach.
 
-If this were an actual real world requirement, I would expect it to be one of several microservices.
-
 I have switched this to use in-memory database but it was developed with mysql and will build and work
 with that instead, the config has been left commented out in the application.properties file.
+
+If this were an actual real world requirement, I would expect it to be one of several microservices.
 
 Another, which we might call order-service or order-manager or something.
 That would make HTTP request to this microservice and get the latest set of
