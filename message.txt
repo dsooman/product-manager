@@ -34,11 +34,27 @@ Things that could / should have been added:
 -Fuller test coverage.   I only wrote tests I needed during development / testing and
 there should be more.   I like an 80% or so test coverage level.
 
--Examples of Curl commands to use the API, but I am guessing you will figure it out.
+-Relational database design; there are primary keys but no foreign key constraints / relations.   
+This means it is possible to add a requirement for a Product that does not exist.   It might be better
+to change this so that instead of Product name in the requirements table there is instead a foreign key
+ref to primary key in Product.   This would be pretty easy to sort but I will leave this as a potential
+talking point if there is an interview following this.
+
+I decided to leave this because I thought perhaps it might be desireable to add a product purchase requirement
+for a Product for which a rule was never specified.   Overall design might benefit from some discussion / design
+workshop on this.   It is my no means a perfect solution to this problem but rather a showcase of my level
+of coding skill.
+
+-The ability to retrieve groups of product purchase requirements based on a specified date.   Dates in human
+readable format rather than epoch time?
+
+-Examples of Curl commands to use the API, but I am guessing you will figure it out.  I tried to keep API simple.
 
 -Dockerfile and Jenkins pipeline files, I can supply what I reckon those would be if you want.
 
 -I have left TODO comments in the code of things I am not happy with and would seek to improve.
+Certainly it might be possible to achieve some of this with fewer database queries which are an overhead
+and might become a concern if this software was working with say 10,000s of Products, etc.
 
 
 if you have any questions or comments please email me at dsooman@hotmail.com
