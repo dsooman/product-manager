@@ -127,7 +127,8 @@ public class ProductServiceImpl implements ProductService {
 					"Requirements have never been generated, please run getProductPurchaseRequirements() method");
 		}
 
-		return this.productPurchaseRequirementRepository.findProductPurchaseRequirementsByTime(latestTime);
+		return Collections.unmodifiableSet(
+				this.productPurchaseRequirementRepository.findProductPurchaseRequirementsByTime(latestTime));
 	}
 
 	/**
