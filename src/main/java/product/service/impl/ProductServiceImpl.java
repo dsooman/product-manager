@@ -172,8 +172,8 @@ public class ProductServiceImpl implements ProductService {
 			return;
 		}
 
-		final Set<ProductPurchaseRequirement> latestProductPurchaseRequirements = this.productPurchaseRequirementRepository
-				.findProductPurchaseRequirementsByTime(latestTime);
+		final Set<ProductPurchaseRequirement> latestProductPurchaseRequirements = this
+				.getLatestProductPurchaseRequirements();
 
 		final Map<String, List<ProductPurchaseRequirement>> latestProductPurchaseRequirementsMap = latestProductPurchaseRequirements
 				.stream().collect(Collectors.groupingBy(ProductPurchaseRequirement::getName));
