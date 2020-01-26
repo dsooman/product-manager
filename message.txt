@@ -1,0 +1,50 @@
+Hello to whoever is reviewing this.
+
+Please find my solution to your requirement, which is a Spring Boot based microservice, using Java 11.
+
+In terms of testing, fire it up and point Postman or something at it; I often use curl in command line.
+
+I have written tests in Spock in Groovy to take a BDD type-ish approach.
+
+I have switched this to use in-memory database but it was developed with mysql and will build and work
+with that instead, the config has been left commented out in the application.properties file.
+
+If this were an actual real world requirement, I would expect it to be one of several microservices.
+
+Another, which we might call order-service or order-manager or something.
+That would make HTTP request to this microservice and get the latest set of
+product purchase requirements.
+
+A good enhancement would be to specify the supplier for the Product.
+Then the order service would group those using a stream and then send the orders for
+stock to the appropriate suppliers, some might want an email, or a message to a queue, or an
+http request, etc, etc.
+
+Another service might have a front end that recorded customer purchases and send
+updates to this service to keep track of stock levels.   It could have a front
+end in react or something, maybe it runs on handheld tablets with bar code scanner on
+them or something, who knows?
+
+If you find any bugs / missing requirements / want me to show how I would change any of
+this on another feature or bugfix branch, let me know.
+
+
+Things that could / should have been added:
+(I am nursing a cold this weekend and also doing a similar test for another job application)
+
+-Fuller test coverage.   I only wrote tests I needed during development / testing and
+there should be more.   I like an 80% or so test coverage level.
+
+-Examples of Curl commands to use the API, but I am guessing you will figure it out.
+
+-Dockerfile and Jenkins pipeline files, I can supply what I reckon those would be if you want.
+
+-I have left TODO comments in the code of things I am not happy with and would seek to improve.
+
+
+if you have any questions or comments please email me at dsooman@hotmail.com
+
+Thankyou this helped keep me busy whilst I was stuck indoors with a cold.
+
+
+

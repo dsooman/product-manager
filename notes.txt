@@ -1,6 +1,0 @@
-create database products;
-create user 'product'@'%' identified by 'product';
-grant all on product.* to 'product'@'%';
-create user 'product'@'localhost' identified by 'product';
-grant all on product.* to 'product'@'localhost';
-
