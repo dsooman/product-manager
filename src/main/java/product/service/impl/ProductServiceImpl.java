@@ -3,6 +3,7 @@ package product.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import product.exception.InvalidProductException;
+import product.exception.ProductPurchaseRequirementMissingException;
 import product.exception.ProductUpdateException;
 import product.model.Product;
 import product.model.ProductPurchaseRequirement;
@@ -199,5 +201,79 @@ public class ProductServiceImpl implements ProductService {
 		final Product product = productOptional.get();
 		product.setBlocked(false);
 		this.save(product).orElseThrow(() -> new ProductUpdateException("Could not save product with name " + name));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Set<ProductPurchaseRequirement> getLatestProductPurchaseRequirements() {
+
+		Long latestTime = productPurchaseRequirementRepository.findMaxTime();
+
+		if (latestTime == null) {
+			throw new ProductPurchaseRequirementMissingException(
+					"Requirements have never been generated, please run getProductPurchaseRequirements() method");
+		}
+
+		return productPurchaseRequirementRepository.findProductPurchaseRequirementsByTime(latestTime);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void overrideMinAmount(String name, Long amount) {
+		Objects.requireNonNull(name);
+		Objects.requireNonNull(amount);
+
+		Long latestTime = productPurchaseRequirementRepository.findMaxTime();
+
+		if (latestTime == null) {
+
+			// Means that getProductPurchaseRequirements() has never been ran...
+			// So we shall create a single entry with a time of now...
+
+			ProductPurchaseRequirement productPurchaseRequirement = new ProductPurchaseRequirement();
+			productPurchaseRequirement.setName(name);
+			productPurchaseRequirement.setAmount(amount);
+			productPurchaseRequirement.setTime(TimeUtilities.getCurrentTime());
+			this.productPurchaseRequirementRepository.save(productPurchaseRequirement);
+			return;
+		}
+
+		Set<ProductPurchaseRequirement> latestProductPurchaseRequirements = this.productPurchaseRequirementRepository
+				.findProductPurchaseRequirementsByTime(latestTime);
+
+		Map<String, List<ProductPurchaseRequirement>> latestProductPurchaseRequirementsMap = latestProductPurchaseRequirements
+				.stream().collect(Collectors.groupingBy(ProductPurchaseRequirement::getName));
+
+		if (latestProductPurchaseRequirementsMap.containsKey(name)) {
+
+			Optional<ProductPurchaseRequirement> productPurchaseRequirementOptional = latestProductPurchaseRequirementsMap
+					.get(name).stream().findFirst();
+
+			if (productPurchaseRequirementOptional.isPresent()) {
+
+				// Means we already have a Product purchase requirements for this Product set...
+				// Now we will get and amend it...
+
+				ProductPurchaseRequirement productPurchaseRequirement = productPurchaseRequirementOptional.get();
+				productPurchaseRequirement.setAmount(amount);
+				this.productPurchaseRequirementRepository.save(productPurchaseRequirement);
+				return;
+			}
+		}
+
+		// Means there is a latest Set of Product purchase requirements, but did not
+		// feature
+		// the Product in question. So we will add it with the same time as the existing
+		// records...
+
+		ProductPurchaseRequirement productPurchaseRequirement = new ProductPurchaseRequirement();
+		productPurchaseRequirement.setName(name);
+		productPurchaseRequirement.setAmount(amount);
+		productPurchaseRequirement.setTime(latestTime);
+		this.productPurchaseRequirementRepository.save(productPurchaseRequirement);
 	}
 }

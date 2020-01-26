@@ -64,7 +64,7 @@ class ProductServiceImplSpec extends Specification {
 
 	def "ProductServiceImpl can block a Product and it will not appear on Product purchase purchase requirements results"() {
 
-		given: "two new Products are created and saved, where they require additional purchasing to maintain desired stock levels"
+		given: "some new Products are created and saved, where they require additional purchasing to maintain desired stock levels"
 		productService.create("A")
 		productService.setMinAmount("A", 10)
 		productService.setCurrentAmount("A", 5)
@@ -99,5 +99,39 @@ class ProductServiceImplSpec extends Specification {
 		foundProduct1 == ""
 		foundProduct2 == "B"
 		foundProduct3 == "C"
+	}
+
+	def "ProductServiceImpl can generate Product purchase requirements based on Product rules and then additionally add or amend them"() {
+
+		given: "some new Products are created and saved, where they require additional purchasing to maintain desired stock levels"
+		productService.create("A")
+		productService.setMinAmount("A", 10)
+		productService.setCurrentAmount("A", 5)
+		productService.block("A")
+		productService.create("B")
+		productService.setMinAmount("B", 10)
+		productService.setCurrentAmount("B", 5)
+		Product product3 = productService.create("C")
+		productService.setMinAmount("C", 10)
+		productService.setCurrentAmount("C", 5)
+
+		when: "a Product purchase requirements are generated and then amended / added to"
+		//This will work whether there is a call to getProductPurchaseRequirements() or not...
+		productService.getProductPurchaseRequirements()
+		productService.overrideMinAmount("A", 20)
+
+		then: "getting the latest Product purchase requirements will contain the amendment / addition"
+
+		Set<ProductPurchaseRequirement> latestProductPurchaseRequirements = productService.getLatestProductPurchaseRequirements()
+
+		//Note that Product A was blocked above, but now that has been overridden...
+		Long foundProductAmount = null;
+		for (ProductPurchaseRequirement productPurchaseRequirement: latestProductPurchaseRequirements) {
+			if (productPurchaseRequirement.name == "A") {
+				foundProductAmount = productPurchaseRequirement.amount
+			}
+		}
+
+		foundProductAmount == 20
 	}
 }
