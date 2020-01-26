@@ -120,7 +120,7 @@ class ProductServiceImplSpec extends Specification {
 		productService.setMinAmount("C", 10)
 		productService.setCurrentAmount("C", 5)
 
-		when: "a Product purchase requirements are generated and then amended / added to"
+		when: "the latest Product purchase requirements are generated and then amended / added to"
 		//This will work whether there is a call to getProductPurchaseRequirements() or not...
 		productService.getProductPurchaseRequirements()
 		productService.overrideMinAmount("A", 20)
