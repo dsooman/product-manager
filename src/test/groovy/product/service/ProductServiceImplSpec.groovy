@@ -40,6 +40,8 @@ class ProductServiceImplSpec extends Specification {
 	}
 
 	def cleanup() {
+		productRepository.deleteAll()
+		productPurchaseRequirementRepository.deleteAll()
 	}
 
 	def "ProductServiceImpl can create a Product and then retrieve it"() {
