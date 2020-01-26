@@ -107,7 +107,10 @@ class ProductServiceImplSpec extends Specification {
 		productService.create("A")
 		productService.setMinAmount("A", 10)
 		productService.setCurrentAmount("A", 5)
+		
+		//This will work whether this Product is blocked or not, because we are overriding that...
 		productService.block("A")
+		
 		productService.create("B")
 		productService.setMinAmount("B", 10)
 		productService.setCurrentAmount("B", 5)
